@@ -51,6 +51,13 @@ p.lead{color:var(--muted);font-size:1rem;}
   margin-bottom:32px;
 }
 
+.gallery-2col .card img {
+aspect-ratio: 3/4; /* width:height ratio — portrait */
+object-fit: cover; /* crop to fill the container if needed */
+height: auto; /* keep width scaling */
+}
+
+
 /* Single-column gallery */
 .gallery-single{
   display:flex;
