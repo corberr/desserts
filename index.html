@@ -43,6 +43,12 @@ p.lead{color:var(--muted);font-size:1rem;}
   margin-bottom:32px;
 }
 
+.gallery-3col .card img {
+aspect-ratio: 3/4; /* width:height ratio — portrait */
+object-fit: cover; /* crop to fill the container if needed */
+height: auto; /* keep width scaling */
+}
+
 /* 2-column gallery */
 .gallery-2col{
   display:grid;
@@ -129,7 +135,7 @@ height: auto; /* keep width scaling */
       </div>
     </article>
     <article class="card">
-      <img src="strawberry.jpg" alt="Item 2">
+      <img src="nutty-chloe.jpg" alt="Item 2">
       <div class="card-body">
         <div class="title">Nutty Chloe — Viral Dubai Chocolate Strawberries</div>
         <div class="desc">Fresh organic strawberries drizzled with luscious Belgian chocolate, Pistachio cream topped off with crispy kataifi and pistachio bits</div>
