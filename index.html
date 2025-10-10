@@ -1,128 +1,117 @@
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Corberr Desserts</title>
+<title>Gallery with Multi & Single Columns</title>
 <style>
 :root{
-  --bg:#fafafa; --card:#fff; --muted:#6b6b6b; --accent:#d35400; --gap:16px; --max-w:1100px;
+  --bg:#fafafa;
+  --card:#fff;
+  --muted:#6b6b6b;
+  --accent:#d35400;
+  --gap:16px;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
   background:var(--bg);
   color:#111;
   line-height:1.4;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
   padding:16px;
 }
 
 .site{
-  width:100%;
-  max-width:var(--max-w);
-  margin-inline:auto;
-  background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
-  border-radius:14px;
-  box-shadow:0 12px 40px rgba(10,10,10,0.06);
-  overflow:hidden;
+  max-width:1100px;
+  margin:0 auto;
+  padding:16px;
 }
 
 header{
   text-align:center;
-  padding:24px 16px;
+  margin-bottom:24px;
 }
+h1{font-size:1.8rem;margin-bottom:8px;}
+p.lead{color:var(--muted);font-size:1rem;}
 
-h1{
-  font-size:clamp(1.25rem,5vw,2rem);
-  margin-bottom:8px;
-}
-p.lead{
-  color:var(--muted);
-  font-size:clamp(0.9rem,3vw,1rem);
-  max-width:70ch;
-  margin:0 auto;
-}
-
-.gallery{
+/* 3-column gallery */
+.gallery-3col{
   display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:var(--gap);
-  padding:20px;
-  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
-  justify-items:center;
+  margin-bottom:32px;
 }
 
 .card{
-  width:100%;
-  max-width:420px;
   background:var(--card);
   border-radius:12px;
   overflow:hidden;
   display:flex;
   flex-direction:column;
-  align-items:stretch;
-  box-shadow:0 6px 18px rgba(10,10,10,0.05);
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
   transition:transform .16s ease, box-shadow .16s ease;
 }
-.card:hover{transform:translateY(-4px); box-shadow:0 12px 24px rgba(10,10,10,0.08);}
+.card:hover{transform:translateY(-4px); box-shadow:0 12px 24px rgba(0,0,0,0.08);}
 
-.media{
+.card img{
   width:100%;
-  aspect-ratio:16/10;
-  object-fit:cover;
+  height:auto;
+  display:block;
 }
 
 .card-body{
-  padding:12px 14px;
+  padding:12px;
   text-align:center;
 }
-.title{font-weight:600;margin-bottom:4px;font-size:1rem}
-.desc{color:var(--muted);font-size:0.95rem;margin-bottom:6px}
-.caption{font-size:0.85rem;color:var(--muted);margin-top:4px}
+.card-body .title{font-weight:600;margin-bottom:6px;}
+.card-body .desc{color:var(--muted); font-size:0.95rem;}
+.card-body .caption{font-size:0.85rem; color:var(--muted); margin-top:4px;}
 
-.actions{display:flex;gap:10px;justify-content:center;padding:16px;}
-.btn{
-  border:0;
-  padding:9px 14px;
-  border-radius:10px;
-  cursor:pointer;
-  background:var(--accent);
-  color:#fff;
-  font-weight:600;
+/* Single-column full-width gallery */
+.gallery-single{
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap);
+  margin-bottom:32px;
 }
 
-@media (max-width:400px){
-  body{padding:12px}
-  header{padding:18px 12px}
-  .gallery{padding:12px; gap:12px;}
+.actions{
+  text-align:center;
+  margin-top:16px;
+}
+.btn{
+  padding:10px 16px;
+  background:var(--accent);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
 }
 </style>
 </head>
 <body>
 
-<div class="site" role="main" aria-labelledby="siteTitle">
+<div class="site">
   <header>
-    <h1 id="siteTitle">Corberr Desserts</h1>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    <img src="header1.jpg">
+    <h1>Corberr Desserts</h1>
+    <p class="lead">3-column gallery above, single-column full-width gallery below.</p>
   </header>
 
-  <section class="gallery" aria-label="Gallery of items">
+  <!-- 3-column gallery -->
+  <section class="gallery-3col">
     <article class="card">
-      <img class="media" src="item1.jpg" alt="Croffle with strawberries" loading="lazy">
+      <img src="images/item1.jpg" alt="Item 1">
       <div class="card-body">
         <div class="title">Croffle — Strawberries</div>
-        <div class="desc">Crispy croissant-waffle topped with fresh strawberries and Belgian chocolate.</div>
+        <div class="desc">Crispy croissant-waffle topped with fresh strawberries and chocolate.</div>
         <div class="caption">Fresh • Made to order</div>
       </div>
     </article>
 
     <article class="card">
-      <img class="media" src="item1.jpg" alt="Sticky rice porridge" loading="lazy">
+      <img src="images/item2.jpg" alt="Item 2">
       <div class="card-body">
         <div class="title">Sticky Rice Porridge</div>
         <div class="desc">Warm, comforting porridge made with dark cocoa and sweet toppings.</div>
@@ -131,17 +120,38 @@ p.lead{
     </article>
 
     <article class="card">
-      <img class="media" src="item1.jpg" alt="Belgian chocolate strawberries" loading="lazy">
+      <img src="images/item3.jpg" alt="Item 3">
       <div class="card-body">
         <div class="title">Belgian Chocolate Strawberries</div>
-        <div class="desc">Fresh strawberries dipped in premium Belgian chocolate — simple and indulgent.</div>
+        <div class="desc">Fresh strawberries dipped in premium Belgian chocolate.</div>
         <div class="caption">Shareable • Best seller</div>
       </div>
     </article>
   </section>
 
+  <!-- Single-column gallery -->
+  <section class="gallery-single">
+    <article class="card">
+      <img src="images/item4.jpg" alt="Single Column Item">
+      <div class="card-body">
+        <div class="title">Special Feature Item</div>
+        <div class="desc">This image spans full width and scales automatically to container size.</div>
+        <div class="caption">Highlight • Full width</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="images/item5.jpg" alt="Another Full Width Item">
+      <div class="card-body">
+        <div class="title">Another Full-Width Item</div>
+        <div class="desc">Use this for featured images or promotional content.</div>
+        <div class="caption">Featured • Big impact</div>
+      </div>
+    </article>
+  </section>
+
   <div class="actions">
-    <button class="btn" onclick="alert('Add link')">Learn More</button>
+    <button class="btn">Order Now</button>
   </div>
 </div>
 
