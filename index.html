@@ -1,170 +1,147 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Centered Gallery — Simple Fluid UI</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Centered Gallery — Mobile-Friendly</title>
+<style>
+:root{
+  --bg:#fafafa; --card:#fff; --muted:#6b6b6b; --accent:#d35400; --gap:16px; --max-w:1100px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background:var(--bg);
+  color:#111;
+  line-height:1.4;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:16px;
+}
 
-  <style>
-    :root{
-      --max-w: 1100px;
-      --bg: #fafafa;
-      --card: #ffffff;
-      --muted: #6b6b6b;
-      --accent: #d35400;
-      --gap: 18px;
-    }
+.site{
+  width:100%;
+  max-width:var(--max-w);
+  margin-inline:auto;
+  background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.98));
+  border-radius:14px;
+  box-shadow:0 12px 40px rgba(10,10,10,0.06);
+  overflow:hidden;
+}
 
-    /* Reset / base */
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:#111;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.4;
-      padding:32px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+header{
+  text-align:center;
+  padding:24px 16px;
+}
 
-    /* Page container that stays centered and fluid */
-    .site{
-      width:100%;
-      max-width:var(--max-w);
-      margin-inline:auto;
-      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
-      border-radius:14px;
-      box-shadow:0 12px 40px rgba(10,10,10,0.06);
-      overflow:hidden;
-    }
+h1{
+  font-size:clamp(1.25rem,5vw,2rem);
+  margin-bottom:8px;
+}
+p.lead{
+  color:var(--muted);
+  font-size:clamp(0.9rem,3vw,1rem);
+  max-width:70ch;
+  margin:0 auto;
+}
 
-    header{
-      text-align:center;
-      padding:30px 20px;
-    }
-    h1{
-      font-size:clamp(1.25rem, 2.4vw, 2rem);
-      margin-bottom:8px;
-    }
-    p.lead{
-      color:var(--muted);
-      font-size:clamp(0.9rem, 1.6vw, 1.05rem);
-      max-width:70ch;
-      margin:0 auto;
-    }
+.gallery{
+  display:grid;
+  gap:var(--gap);
+  padding:20px;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  justify-items:center;
+}
 
-    /* Gallery area */
-    .gallery{
-      display:grid;
-      gap:var(--gap);
-      padding:28px;
-      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-      align-items:start;
-      justify-items:center;
-      background:transparent;
-    }
+.card{
+  width:100%;
+  max-width:420px;
+  background:var(--card);
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  box-shadow:0 6px 18px rgba(10,10,10,0.05);
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.card:hover{transform:translateY(-4px); box-shadow:0 12px 24px rgba(10,10,10,0.08);}
 
-    .card{
-      width:100%;
-      max-width:420px;
-      background:var(--card);
-      border-radius:12px;
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      align-items:stretch;
-      box-shadow:0 6px 18px rgba(10,10,10,0.05);
-      transition:transform .16s ease, box-shadow .16s ease;
-    }
-    .card:hover{ transform:translateY(-6px); box-shadow:0 18px 36px rgba(10,10,10,0.08) }
+.media{
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+}
 
-    .media{
-      width:100%;
-      aspect-ratio:16/10;
-      display:block;
-      object-fit:cover;
-    }
+.card-body{
+  padding:12px 14px;
+  text-align:center;
+}
+.title{font-weight:600;margin-bottom:4px;font-size:1rem}
+.desc{color:var(--muted);font-size:0.95rem;margin-bottom:6px}
+.caption{font-size:0.85rem;color:var(--muted);margin-top:4px}
 
-    .card-body{
-      padding:14px 16px;
-      text-align:center;
-    }
-    .title{ font-weight:600; margin-bottom:6px; font-size:1rem }
-    .desc{ color:var(--muted); font-size:0.95rem; margin-bottom:10px }
+.actions{display:flex;gap:10px;justify-content:center;padding:16px;}
+.btn{
+  border:0;
+  padding:9px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  background:var(--accent);
+  color:#fff;
+  font-weight:600;
+}
 
-    /* Centered caption under images */
-    .caption{ font-size:0.85rem; color:var(--muted); margin-top:6px }
-
-    /* Footer / actions */
-    .actions{ display:flex; gap:10px; justify-content:center; padding:18px; }
-    .btn{
-      border:0;
-      padding:9px 14px;
-      border-radius:10px;
-      cursor:pointer;
-      background:var(--accent);
-      color:#fff;
-      font-weight:600;
-      box-shadow:0 6px 18px rgba(211,84,0,0.12);
-    }
-
-    /* Make sure everything scales nicely on very small screens */
-    @media (max-width:420px){
-      body{padding:18px}
-      .gallery{padding:18px}
-      .card{border-radius:10px}
-      header{padding:20px 12px}
-    }
-  </style>
+@media (max-width:400px){
+  body{padding:12px}
+  header{padding:18px 12px}
+  .gallery{padding:12px; gap:12px;}
+}
+</style>
 </head>
 <body>
 
-  <div class="site" role="main" aria-labelledby="siteTitle">
-    <header>
-      <h1 id="siteTitle">Our Menu & Gallery</h1>
-      <p class="lead">Beautiful, centered photos and short descriptions. Replace the images in <code>images/</code> or change the <code>src</code> attributes below.</p>
-    </header>
+<div class="site" role="main" aria-labelledby="siteTitle">
+  <header>
+    <h1 id="siteTitle">Our Menu & Gallery</h1>
+    <p class="lead">Beautiful, centered photos and short descriptions. Replace the images in <code>images/</code> or change the <code>src</code> attributes below.</p>
+  </header>
 
-    <section class="gallery" aria-label="Gallery of items">
-      <!-- Card 1 -->
-      <article class="card">
-        <img class="media" src="images/item1.jpg" alt="Croffle with strawberries" loading="lazy">
-        <div class="card-body">
-          <div class="title">Croffle — Strawberries</div>
-          <div class="desc">Crispy croissant-waffle topped with fresh strawberries and Belgian chocolate.</div>
-          <div class="caption">Fresh • Made to order</div>
-        </div>
-      </article>
+  <section class="gallery" aria-label="Gallery of items">
+    <article class="card">
+      <img class="media" src="images/item1.jpg" alt="Croffle with strawberries" loading="lazy">
+      <div class="card-body">
+        <div class="title">Croffle — Strawberries</div>
+        <div class="desc">Crispy croissant-waffle topped with fresh strawberries and Belgian chocolate.</div>
+        <div class="caption">Fresh • Made to order</div>
+      </div>
+    </article>
 
-      <!-- Card 2 -->
-      <article class="card">
-        <img class="media" src="images/item2.jpg" alt="Sticky rice porridge" loading="lazy">
-        <div class="card-body">
-          <div class="title">Sticky Rice Porridge</div>
-          <div class="desc">Warm, comforting porridge made with dark cocoa and sweet toppings.</div>
-          <div class="caption">Comfort food • Vegan option</div>
-        </div>
-      </article>
+    <article class="card">
+      <img class="media" src="images/item2.jpg" alt="Sticky rice porridge" loading="lazy">
+      <div class="card-body">
+        <div class="title">Sticky Rice Porridge</div>
+        <div class="desc">Warm, comforting porridge made with dark cocoa and sweet toppings.</div>
+        <div class="caption">Comfort food • Vegan option</div>
+      </div>
+    </article>
 
-      <!-- Card 3 -->
-      <article class="card">
-        <img class="media" src="images/item3.jpg" alt="Belgian chocolate strawberries" loading="lazy">
-        <div class="card-body">
-          <div class="title">Belgian Chocolate Strawberries</div>
-          <div class="desc">Fresh strawberries dipped in premium Belgian chocolate — simple and indulgent.</div>
-          <div class="caption">Shareable • Best seller</div>
-        </div>
-      </article>
-    </section>
+    <article class="card">
+      <img class="media" src="images/item3.jpg" alt="Belgian chocolate strawberries" loading="lazy">
+      <div class="card-body">
+        <div class="title">Belgian Chocolate Strawberries</div>
+        <div class="desc">Fresh strawberries dipped in premium Belgian chocolate — simple and indulgent.</div>
+        <div class="caption">Shareable • Best seller</div>
+      </div>
+    </article>
+  </section>
 
-    <div class="actions" aria-hidden="false">
-      <button class="btn" onclick="alert('Demo action — replace with real link')">Order / Learn More</button>
-    </div>
+  <div class="actions">
+    <button class="btn" onclick="alert('Demo action — replace with real link')">Order / Learn More</button>
   </div>
+</div>
 
 </body>
 </html>
